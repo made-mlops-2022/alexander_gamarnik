@@ -1,0 +1,23 @@
+input_data_path: "data/processed/test_x.csv"
+output_data_path: "reports/prediction.csv"
+working_model_path: "models/model_lr.pkl"
+metric_path: "reports/metrics_lr.json"
+log_path: "reports/log.txt"
+
+feature_params:
+  categorical_features:
+    - "sex"
+    - "chest pain"
+    - "fasting blood sugar"
+    - "resting electrocardiographic results"
+    - "exercise induced angina"
+    - "slope"
+    - "number of major vessels"
+    - "thal"
+  numerical_features:
+    - "age"
+    - "resting blood pressure"
+    - "cholesterol"
+    - "max heart rate"
+    - "oldpeak"
+  target_col: "condition"

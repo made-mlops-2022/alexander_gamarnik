@@ -15,7 +15,6 @@ from ml_project.entities.train_params import TrainingParams
 
 SklearnRegressionModel = Union[RandomForestRegressor, LinearRegression]
 
-
 def train_model(
     features: pd.DataFrame, target: pd.Series, train_params: TrainingParams
 ) -> SklearnRegressionModel:

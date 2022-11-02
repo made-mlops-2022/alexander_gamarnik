@@ -69,6 +69,11 @@ def run_train_pipeline(training_pipeline_params):
     train_target = extract_target(train_df, training_pipeline_params.feature_params)
     train_df = train_df.drop(training_pipeline_params.feature_params.target_col, 1)
     val_df = val_df.drop(training_pipeline_params.feature_params.target_col, 1)
+    
+    val_target.to_csv(training_pipeline_params.test_y_path, index=False)
+    train_target.to_csv(training_pipeline_params.train_y_path, index=False)
+    train_df.to_csv(training_pipeline_params.train_x_path, index=False)
+    val_df.to_csv(training_pipeline_params.test_x_path, index=False)
 
     logger.info(f"train_df.shape is {train_df.shape}")
     logger.info(f"val_df.shape is {val_df.shape}")

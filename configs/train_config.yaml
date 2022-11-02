@@ -1,6 +1,10 @@
 input_data_path: "data/processed/heart_cleveland_upload.csv"
 output_model_path: "models/model_lr.pkl"
 metric_path: "models/metrics_lr.json"
+train_x_path: "data/processed/train_x.csv"
+test_x_path: "data/processed/test_x.csv"
+train_y_path: "data/processed/train_y.csv"
+test_y_path: "data/processed/test_y.csv"
 
 # downloading_params:
 #   s3_bucket: for-dvc
