@@ -1,16 +1,16 @@
 import json
 import logging
-import os
+# import os
 import sys
-from pathlib import Path
+# from pathlib import Path
 
 import click
-import pandas as pd
+# import pandas as pd
 
 from ml_project.data import read_data, split_train_val_data
-from ml_project.data.make_dataset import download_data_from_s3
+# from ml_project.data.make_dataset import download_data_from_s3
 from ml_project.entities.train_pipeline_params import (
-    TrainingPipelineParams,
+    # TrainingPipelineParams,
     read_training_pipeline_params
 )
 from ml_project.features import make_features
@@ -69,7 +69,7 @@ def run_train_pipeline(training_pipeline_params):
     train_target = extract_target(train_df, training_pipeline_params.feature_params)
     train_df = train_df.drop(training_pipeline_params.feature_params.target_col, 1)
     val_df = val_df.drop(training_pipeline_params.feature_params.target_col, 1)
-    
+
     val_target.to_csv(training_pipeline_params.test_y_path, index=False)
     train_target.to_csv(training_pipeline_params.train_y_path, index=False)
     train_df.to_csv(training_pipeline_params.train_x_path, index=False)

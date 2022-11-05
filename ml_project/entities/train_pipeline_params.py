@@ -39,7 +39,8 @@ def read_training_pipeline_params(path: str) -> TrainingPipelineParams:
     with open(path, "r") as input_stream:
         schema = TrainingPipelineParamsSchema()
         return schema.load(yaml.safe_load(input_stream))
-    
+
+
 def register_train_configs() -> None:
     cs = ConfigStore.instance()
     cs.store(name="config", node=TrainingPipelineParams)

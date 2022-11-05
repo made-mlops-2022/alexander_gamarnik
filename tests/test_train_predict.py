@@ -1,8 +1,8 @@
 import os
 import sys
-from typing import List
+# from typing import List
 
-import pytest
+# import pytest
 
 
 sys.path.append(os.path.join(os.path.abspath("."), "ml_project/"))

@@ -2,7 +2,7 @@ import pandas as pd
 from faker import Faker
 from numpy.random import normal
 
-from ml_project.entities import Config
+# from ml_project.entities import Config
 
 
 def generate_dataset(n_rows: int):

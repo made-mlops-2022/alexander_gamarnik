@@ -1,7 +1,7 @@
 import os
 import sys
-import json
-from nbformat import read
+# import json
+# from nbformat import read
 
 import numpy as np
 import pandas as pd
@@ -12,17 +12,14 @@ import pytest
 
 
 from hydra import initialize, compose
-from hydra.utils import instantiate
-from omegaconf import DictConfig, OmegaConf
+# from hydra.utils import instantiate
+# from omegaconf import DictConfig, OmegaConf
 
-from ml_project.entities.train_params import TrainingParams
+# from ml_project.entities.train_params import TrainingParams
 
-sys.path.append("../")
-sys.path.append(os.path.join(os.path.abspath(".")))
-sys.path.append(os.path.join(os.path.abspath("."), "ml_project/"))
 import ml_project.entities
 from ml_project.data.make_dataset import (
-    download_data_from_s3,
+    # download_data_from_s3,
     read_data,
     split_train_val_data,
 )
@@ -32,9 +29,12 @@ from ml_project.features.build_features import (
     process_numerical_features,
     build_numerical_pipeline,
     build_transformer,
-    extract_target                                 
+    extract_target
 )
 
+sys.path.append("../")
+sys.path.append(os.path.join(os.path.abspath(".")))
+sys.path.append(os.path.join(os.path.abspath("."), "ml_project/"))
 
 TRAIN_DATA_SIZE = 100
 CONFIG_FILES = [f.split(".")[0] for f in os.listdir("configs") if "yaml" in f]

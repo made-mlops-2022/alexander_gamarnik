@@ -1,26 +1,25 @@
-import json
+# import json
 import logging
-import os
+# import os
 import sys
-from pathlib import Path
+# from pathlib import Path
 import pickle
 
 import click
 import pandas as pd
 
 from ml_project.data import read_data
-from ml_project.data.make_dataset import download_data_from_s3
+# from ml_project.data.make_dataset import download_data_from_s3
 from ml_project.entities.predict_pipeline_params import (
-    PredictPipelineParams,
+    # PredictPipelineParams,
     read_predict_pipeline_params
 )
-# from ml_project.features import make_features
 from ml_project.models import (
     predict_model,
 )
 import mlflow
 
-from ml_project.models.model_fit_predict import create_inference_pipeline
+# from ml_project.models.model_fit_predict import create_inference_pipeline
 
 logger = logging.getLogger(__name__)
 handler = logging.StreamHandler(sys.stdout)
@@ -81,4 +80,3 @@ def predict_pipeline_command(config_path: str):
 
 if __name__ == "__main__":
     predict_pipeline_command()
-

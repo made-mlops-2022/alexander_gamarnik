@@ -1,6 +1,6 @@
 import pickle
 from typing import Dict, Union
-from cv2 import norm
+# from cv2 import norm
 
 import numpy as np
 import pandas as pd
@@ -14,6 +14,7 @@ from sklearn.naive_bayes import GaussianNB
 from ml_project.entities.train_params import TrainingParams
 
 SklearnRegressionModel = Union[RandomForestRegressor, LinearRegression]
+
 
 def train_model(
     features: pd.DataFrame, target: pd.Series, train_params: TrainingParams
