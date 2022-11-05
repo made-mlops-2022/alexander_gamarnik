@@ -60,6 +60,4 @@ def build_transformer(params: FeatureParams) -> ColumnTransformer:
 
 def extract_target(df: pd.DataFrame, params: FeatureParams) -> pd.Series:
     target = df[params.target_col]
-    if params.use_log_trick:
-        target = pd.Series(np.log(target.to_numpy()))
     return target

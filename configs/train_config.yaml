@@ -42,3 +42,7 @@ feature_params:
   # features_to_drop:
   #   - "resting blood pressure"
   target_col: "condition"
+
+# transform_params:
+#   ohe_categorical: True
+#   normalize_numerical: True
