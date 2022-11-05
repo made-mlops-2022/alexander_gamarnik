@@ -47,12 +47,8 @@ ch.setFormatter(formatter)
 logger.addHandler(ch)
 logger.addHandler(fh)
 
-@hydra.main(version_base=None, config_path="../configs", config_name="train_config")
-def train_pipeline(training_pipeline_params):
-    
-    return run_train_pipeline(training_pipeline_params)
-
-    # training_pipeline_params = read_training_pipeline_params(config_path)
+def train_pipeline(config_path: str):
+    training_pipeline_params = read_training_pipeline_params(config_path)
 
     if training_pipeline_params.use_mlflow:
 
@@ -78,7 +74,6 @@ def run_train_pipeline(training_pipeline_params):
     #             os.path.join(downloading_params.output_folder, Path(path).name),
     #         )
 
-    
     logger.info(f"start train pipeline with params {training_pipeline_params}")
     data = read_data(training_pipeline_params.input_data_path)
     logger.info(f"data.shape is {data.shape}")
@@ -88,25 +83,18 @@ def run_train_pipeline(training_pipeline_params):
 
     val_target = extract_target(val_df, training_pipeline_params.feature_params)
     train_target = extract_target(train_df, training_pipeline_params.feature_params)
-    train_df = train_df.drop(training_pipeline_params.feature_params.target_col, axis=1)
-    val_df = val_df.drop(training_pipeline_params.feature_params.target_col, axis=1)
+    train_df = train_df.drop(training_pipeline_params.feature_params.target_col, 1)
+    val_df = val_df.drop(training_pipeline_params.feature_params.target_col, 1)
 
     val_target.to_csv(training_pipeline_params.test_y_path, index=False)
     train_target.to_csv(training_pipeline_params.train_y_path, index=False)
     train_df.to_csv(training_pipeline_params.train_x_path, index=False)
     val_df.to_csv(training_pipeline_params.test_x_path, index=False)
-    # print(train_df[1:])
-    # return
 
     logger.info(f"train_df.shape is {train_df.shape}")
     logger.info(f"val_df.shape is {val_df.shape}")
     transformer = build_transformer(training_pipeline_params.feature_params)
-    # print(transformer)
-    # return
-    
     transformer.fit(train_df)
-    return
-    
     train_features = make_features(transformer, train_df)
     logger.info(f"train_features.shape is {train_features.shape}")
     model = train_model(
@@ -134,11 +122,11 @@ def run_train_pipeline(training_pipeline_params):
     return path_to_model, metrics
 
 
-# @click.command(name="train_pipeline")
-# @click.argument("config_path")
-# def train_pipeline_command(config_path: str):
-#     train_pipeline(config_path)
+@click.command(name="train_pipeline")
+@click.argument("config_path")
+def train_pipeline_command(config_path: str):
+    train_pipeline(config_path)
 
 
 if __name__ == "__main__":
-    train_pipeline()
+    train_pipeline_command()
