@@ -10,12 +10,12 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ~~~
 
-Usage:
+Train | Prediction | Create EDA report:
 ~~~
+# Train
 python ml_project/train_pipeline.py configs/train_config.yaml
-~~~
-
-Prediction:
-~~~
+# Predict
 python ml_project/predict_pipeline.py configs/predict_config.yaml
+# Create EDA report
+python ml_project/create_EDA.py configs/train_config.yaml
 ~~~

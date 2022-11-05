@@ -23,6 +23,8 @@ train_params:
   # model_type: "RandomForestRegressor"
   # model_type: "LinearRegression"
 
+use_mlflow: False
+
 feature_params:
   categorical_features:
     - "sex"
