@@ -15,15 +15,15 @@ from hydra import initialize, compose
 # from hydra.utils import instantiate
 # from omegaconf import DictConfig, OmegaConf
 
-# from ml_project.entities.train_params import TrainingParams
+# from entities.train_params import TrainingParams
 
-import ml_project.entities
-from ml_project.data.make_dataset import (
+import entities
+from data.make_dataset import (
     # download_data_from_s3,
     read_data,
     split_train_val_data,
 )
-from ml_project.features.build_features import (
+from features.build_features import (
     process_categorical_features,
     build_categorical_pipeline,
     process_numerical_features,
@@ -90,7 +90,7 @@ def test_extract_target(synthetic_train_data, train_config):
 
 @pytest.fixture()
 def train_config():
-    ml_project.entities.train_pipeline_params.register_train_configs()
+    entities.train_pipeline_params.register_train_configs()
     with initialize(version_base=None, config_path="../configs"):
         train_params = compose(config_name="train_config")
     return train_params
