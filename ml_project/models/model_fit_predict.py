@@ -11,7 +11,7 @@ from sklearn.metrics import accuracy_score, r2_score, mean_squared_error, mean_a
 from sklearn.pipeline import Pipeline
 from sklearn.naive_bayes import GaussianNB
 
-from ml_project.entities.train_params import TrainingParams
+from entities.train_params import TrainingParams
 
 SklearnRegressionModel = Union[RandomForestRegressor, LinearRegression]
 

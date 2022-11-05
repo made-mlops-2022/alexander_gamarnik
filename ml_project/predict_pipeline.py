@@ -8,18 +8,18 @@ import pickle
 import click
 import pandas as pd
 
-from ml_project.data import read_data
-# from ml_project.data.make_dataset import download_data_from_s3
-from ml_project.entities.predict_pipeline_params import (
+from data import read_data
+# from data.make_dataset import download_data_from_s3
+from entities.predict_pipeline_params import (
     # PredictPipelineParams,
     read_predict_pipeline_params
 )
-from ml_project.models import (
+from models import (
     predict_model,
 )
 import mlflow
 
-# from ml_project.models.model_fit_predict import create_inference_pipeline
+# from models.model_fit_predict import create_inference_pipeline
 
 logger = logging.getLogger(__name__)
 handler = logging.StreamHandler(sys.stdout)

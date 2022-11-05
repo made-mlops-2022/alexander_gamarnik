@@ -4,7 +4,7 @@ import pandas as pd
 from boto3 import client
 from sklearn.model_selection import train_test_split
 
-from ml_project.entities import SplittingParams
+from entities import SplittingParams
 
 
 def download_data_from_s3(s3_bucket: str, s3_path: str, output: str) -> NoReturn:

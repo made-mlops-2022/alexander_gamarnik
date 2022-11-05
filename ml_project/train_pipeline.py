@@ -7,15 +7,15 @@ import sys
 import click
 # import pandas as pd
 
-from ml_project.data import read_data, split_train_val_data
-# from ml_project.data.make_dataset import download_data_from_s3
-from ml_project.entities.train_pipeline_params import (
+from data import read_data, split_train_val_data
+# from data.make_dataset import download_data_from_s3
+from entities.train_pipeline_params import (
     # TrainingPipelineParams,
     read_training_pipeline_params
 )
-from ml_project.features import make_features
-from ml_project.features.build_features import extract_target, build_transformer
-from ml_project.models import (
+from features import make_features
+from features.build_features import extract_target, build_transformer
+from models import (
     train_model,
     serialize_model,
     predict_model,
@@ -23,7 +23,7 @@ from ml_project.models import (
 )
 import mlflow
 
-from ml_project.models.model_fit_predict import create_inference_pipeline
+from models.model_fit_predict import create_inference_pipeline
 
 logger = logging.getLogger(__name__)
 handler = logging.StreamHandler(sys.stdout)
