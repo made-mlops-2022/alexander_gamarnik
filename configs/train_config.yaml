@@ -1,6 +1,6 @@
 input_data_path: "data/processed/heart_cleveland_upload.csv"
-output_model_path: "models/model_lr.pkl"
-metric_path: "models/metrics_lr.json"
+output_model_path: "models/"
+metric_path: "reports/metrics/"
 train_x_path: "data/processed/train_x.csv"
 test_x_path: "data/processed/test_x.csv"
 train_y_path: "data/processed/train_y.csv"
@@ -19,9 +19,8 @@ splitting_params:
 
 train_params:
   model_type: "LogisticRegression"
-  # model_type: "GaussianNB"
-  # model_type: "RandomForestRegressor"
-  # model_type: "LinearRegression"
+  random_state: 3
+
 
 use_mlflow: False
 
@@ -41,9 +40,8 @@ feature_params:
     - "cholesterol"
     - "max heart rate"
     - "oldpeak"
-  # features_to_drop:
-  #   - "resting blood pressure"
   target_col: "condition"
+  use_log_trick: False
 
 # transform_params:
 #   ohe_categorical: True

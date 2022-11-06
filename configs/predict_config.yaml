@@ -1,9 +1,8 @@
 input_data_path: "data/processed/test_x.csv"
-output_data_path: "reports/prediction.csv"
-working_model_path: "models/model_lr.pkl"
-metric_path: "reports/metrics_lr.json"
-log_path: "reports/log.txt"
-
+output_data_path: "reports/predictions/"
+model_path: "models/"
+model_type: "LogisticRegression"
+use_mlflow: False
 feature_params:
   categorical_features:
     - "sex"
@@ -21,3 +20,4 @@ feature_params:
     - "max heart rate"
     - "oldpeak"
   target_col: "condition"
+  use_log_trick: False
