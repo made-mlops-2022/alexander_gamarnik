@@ -1,82 +1,60 @@
-# import json
 import logging
-# import os
-import sys
-# from pathlib import Path
+import os
 import pickle
-
-import click
 import pandas as pd
+import hydra
 
 from data import read_data
-# from data.make_dataset import download_data_from_s3
-from entities.predict_pipeline_params import (
-    # PredictPipelineParams,
-    read_predict_pipeline_params
-)
 from models import (
     predict_model,
 )
-import mlflow
 
-# from models.model_fit_predict import create_inference_pipeline
+LOG_FILEPATH = "logs/predict.log"
 
 logger = logging.getLogger(__name__)
-handler = logging.StreamHandler(sys.stdout)
-logger.setLevel(logging.INFO)
-logger.addHandler(handler)
+logger.setLevel(logging.DEBUG)
+logger.propagate = False
+
+os.makedirs(os.path.dirname(LOG_FILEPATH), exist_ok=True)
+fh = logging.FileHandler(LOG_FILEPATH)
+fh.setLevel(logging.DEBUG)
+ch = logging.StreamHandler()
+ch.setLevel(logging.WARNING)
+formatter = logging.Formatter(
+    "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+)
+fh.setFormatter(formatter)
+ch.setFormatter(formatter)
+logger.addHandler(ch)
+logger.addHandler(fh)
 
 
-def predict_pipeline(config_path: str):
-    predict_pipeline_params = read_predict_pipeline_params(config_path)
-
-    if predict_pipeline_params.use_mlflow:
-
-        mlflow.set_tracking_uri(predict_pipeline_params.mlflow_uri)
-        mlflow.set_experiment(predict_pipeline_params.mlflow_experiment)
-        with mlflow.start_run():
-            mlflow.log_artifact(config_path)
-            model_path, metrics = run_predict_pipeline(predict_pipeline_params)
-            mlflow.log_metrics(metrics)
-            mlflow.log_artifact(model_path)
+@hydra.main(version_base=None, config_path="../configs", config_name="predict_config")
+def predict_pipeline(config):
+    if config.use_mlflow:
+        pass
     else:
-        return run_predict_pipeline(predict_pipeline_params)
+        return run_predict_pipeline(config)
 
 
-def run_predict_pipeline(predict_pipeline_params):
-    # downloading_params = predict_pipeline_params.downloading_params
-    # if downloading_params:
-    #     os.makedirs(downloading_params.output_folder, exist_ok=True)
-    #     for path in downloading_params.paths:
-    #         download_data_from_s3(
-    #             downloading_params.s3_bucket,
-    #             path,
-    #             os.path.join(downloading_params.output_folder, Path(path).name),
-    #         )
-
-    logger.info(f"start predict pipeline with params {predict_pipeline_params}")
-    test_df = read_data(predict_pipeline_params.input_data_path)
+def run_predict_pipeline(config):
+    logger.info(f"start predict pipeline with params {config}")
+    test_df = read_data(config.input_data_path)
     logger.info(f"data.shape is {test_df.shape}")
 
-    with open(predict_pipeline_params.working_model_path, "rb") as file_obj:
+    with open(config.model_path + "model_" + config.model_type + ".pkl", "rb") as file_obj:
         model = pickle.load(file_obj)
         predicts = predict_model(
             model,
             test_df,
-            predict_pipeline_params.feature_params.use_log_trick
+            config.feature_params.use_log_trick
         )
-        predicts_df = pd.DataFrame({predict_pipeline_params.feature_params.target_col: predicts})
-        predicts_df.to_csv(predict_pipeline_params.output_data_path)
+        predicts_df = pd.DataFrame({config.feature_params.target_col: predicts})
+        predicts_df.to_csv(config.output_data_path + "prediction_" + config.model_type + ".csv")
         file_obj.close()
 
     return
 
 
-@click.command(name="train_pipeline")
-@click.argument("config_path")
-def predict_pipeline_command(config_path: str):
-    predict_pipeline(config_path)
-
-
 if __name__ == "__main__":
-    predict_pipeline_command()
+    predict_pipeline()

@@ -1,4 +1,3 @@
-# from importlib.metadata import entry_points
 from setuptools import find_packages, setup
 
 with open("requirements.txt") as f:

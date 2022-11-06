@@ -1,6 +1,5 @@
 import pickle
 from typing import Dict, Union
-# from cv2 import norm
 
 import numpy as np
 import pandas as pd
@@ -18,7 +17,7 @@ SklearnRegressionModel = Union[RandomForestRegressor, LinearRegression]
 
 def train_model(
     features: pd.DataFrame, target: pd.Series, train_params: TrainingParams
-) -> SklearnRegressionModel:
+):
     if train_params.model_type == "RandomForestRegressor":
         model = RandomForestRegressor(
             n_estimators=100, random_state=train_params.random_state

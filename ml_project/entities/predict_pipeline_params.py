@@ -12,9 +12,8 @@ import yaml
 class PredictPipelineParams:
     input_data_path: str
     output_data_path: str
-    working_model_path: str
-    metric_path: str
-    log_path: str
+    model_path: str
+    model_type: str
     feature_params: FeatureParams
     downloading_params: Optional[DownloadParams] = None
     use_mlflow: bool = False

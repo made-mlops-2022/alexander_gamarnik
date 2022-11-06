@@ -1,43 +1,41 @@
 import pandas as pd
 import os
-import sys
-import click
 import logging
-from entities.train_pipeline_params import (
-    read_training_pipeline_params,
-)
+import hydra
+
 from pandas_profiling import ProfileReport
 
+LOG_FILEPATH = "logs/create_eda.log"
 
-def make_eda_report(config_path: str):
-    training_pipeline_params = read_training_pipeline_params(config_path)
-    df = pd.read_csv(training_pipeline_params.input_data_path)
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+logger.propagate = False
+
+os.makedirs(os.path.dirname(LOG_FILEPATH), exist_ok=True)
+fh = logging.FileHandler(LOG_FILEPATH)
+fh.setLevel(logging.DEBUG)
+ch = logging.StreamHandler()
+ch.setLevel(logging.WARNING)
+formatter = logging.Formatter(
+    "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+)
+fh.setFormatter(formatter)
+ch.setFormatter(formatter)
+logger.addHandler(ch)
+logger.addHandler(fh)
+
+
+@hydra.main(version_base=None, config_path="../configs", config_name="train_config")
+def make_eda_report(config):
+    logger.info(config.input_data_path)
+    df = pd.read_csv(config.input_data_path)
     profile = ProfileReport(df, title="EDA Report")
     profile.to_file(
         os.path.join("reports/EDA/", "EDA.html")
     )
 
 
-@click.command(name="make_eda")
-@click.argument("config_path")
-def make_eda_command(config_path: str):
-    make_eda_report(config_path)
-    return
-
-
 if __name__ == "__main__":
-    FORMAT_LOG = "%(asctime)s: %(message)s"
-    file_log = logging.FileHandler("logs/make_eda.log")
-    console_out = logging.StreamHandler(sys.stdout)
-
-    logging.basicConfig(
-        handlers=(file_log, console_out),
-        format=FORMAT_LOG,
-        level=logging.INFO,
-        datefmt="%H:%M:%S",
-    )
-    logger = logging.getLogger(__name__)
-
     logger.info("=====PROGRAM START======")
-    make_eda_command()
-    logger.info("=====PROGRAM STOP======")
+    make_eda_report()
+    logger.info("=====PROGRAM END======")
