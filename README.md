@@ -26,3 +26,8 @@ python ml_project/predict_pipeline.py "model_type=GaussianNB"
 # Create EDA report
 python ml_project/create_EDA.py
 ~~~
+
+Running tests with Pytest:
+~~~
+python -m pytest
+~~~
