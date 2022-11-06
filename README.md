@@ -31,3 +31,5 @@ Running tests with Pytest:
 ~~~
 python -m pytest
 ~~~
+
+After training, predicting, or creating EDA log information will be saved to outputs/ dir.

@@ -1,6 +1,5 @@
 import json
 import logging
-import os
 import hydra
 
 from data import read_data, split_train_val_data
@@ -12,25 +11,7 @@ from models import (
     evaluate_model
 )
 
-
-LOG_FILEPATH = "logs/training.log"
-
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
-logger.propagate = False
-
-os.makedirs(os.path.dirname(LOG_FILEPATH), exist_ok=True)
-fh = logging.FileHandler(LOG_FILEPATH)
-fh.setLevel(logging.DEBUG)
-ch = logging.StreamHandler()
-ch.setLevel(logging.WARNING)
-formatter = logging.Formatter(
-    "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-)
-fh.setFormatter(formatter)
-ch.setFormatter(formatter)
-logger.addHandler(ch)
-logger.addHandler(fh)
 
 
 @hydra.main(version_base=None, config_path="../configs", config_name="train_config")
@@ -42,16 +23,6 @@ def train_pipeline(config):
 
 
 def run_train_pipeline(config):
-    # downloading_params = config.downloading_params
-    # if downloading_params:
-    #     os.makedirs(downloading_params.output_folder, exist_ok=True)
-    #     for path in downloading_params.paths:
-    #         download_data_from_s3(
-    #             downloading_params.s3_bucket,
-    #             path,
-    #             os.path.join(downloading_params.output_folder, Path(path).name),
-    #         )
-
     logger.info(f"start train pipeline with params {config}")
     data = read_data(config.input_data_path)
     logger.info(f"data.shape is {data.shape}")
