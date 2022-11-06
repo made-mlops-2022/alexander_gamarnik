@@ -20,8 +20,8 @@ python ml_project/train_pipeline.py "train_params.model_type=GaussianNB"
 
 # Predict
 python ml_project/predict_pipeline.py
-# Predict with specific model (GaussianNB, for example)
-python ml_project/predict_pipeline.py "model_type=GaussianNB"
+# Predict with specific model, data set and output result path
+python ml_project/predict_pipeline.py "model_type=>model_name<" "input_data_path=>path_to_data<" "output_path=>output_path<"
 
 # Create EDA report
 python ml_project/create_EDA.py
