@@ -1,0 +1,23 @@
+input_data_path: "data/processed/test_x.csv"
+output_data_path: "reports/predictions/"
+model_path: "models/"
+model_type: "LogisticRegression"
+use_mlflow: False
+feature_params:
+  categorical_features:
+    - "sex"
+    - "chest pain"
+    - "fasting blood sugar"
+    - "resting electrocardiographic results"
+    - "exercise induced angina"
+    - "slope"
+    - "number of major vessels"
+    - "thal"
+  numerical_features:
+    - "age"
+    - "resting blood pressure"
+    - "cholesterol"
+    - "max heart rate"
+    - "oldpeak"
+  target_col: "condition"
+  use_log_trick: False
