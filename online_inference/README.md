@@ -39,8 +39,8 @@ python3 requests/make_request.py
 
 ### Docker optimization
 
-1. Using python:3.10-slim-bullseye
-   Size: 693 MB
+1. Using python:3.10-slim-bullseye [[v1]](https://hub.docker.com/layers/alexwerben/homework2/latest/images/sha256-f93f61eaee67b6aa9cc8f2d87ae35e4322309a793f3eab57b9f1738121ccb6f0?context=repo)
+Size: 693 MB
 
-2. Using python:3.10-slim-bullseye + flag --no-cache-dir when installing dependencies
-   Size: 583 MB
+2. Using python:3.10-slim-bullseye + flag --no-cache-dir when installing dependencies [[v2]](https://hub.docker.com/layers/alexwerben/homework2/v2/images/sha256-7a55a31cee67d11ef5818b1f29f5c07cce04578460590be919cbff07948703e6?context=repo)
+Size: 583 MB
