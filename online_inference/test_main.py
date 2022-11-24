@@ -9,9 +9,6 @@ from main import app, load_model
 
 client = TestClient(app)
 
-# sys.path.append("../../")
-# sys.path.append(os.path.join(os.path.abspath(".")))
-# sys.path.append(os.path.join(os.path.abspath("."), "/online_inference"))
 
 @pytest.fixture(scope='session', autouse=True)
 def initialize_model():
