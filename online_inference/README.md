@@ -4,6 +4,11 @@
 
 MLOps Homework 2
 
+Start:
+```
+cd online_inference/
+```
+
 Build docker image:
 
 ```
