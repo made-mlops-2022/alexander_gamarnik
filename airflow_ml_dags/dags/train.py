@@ -1,12 +1,13 @@
-from datetime import timedelta
-
 from airflow import DAG
 from airflow.providers.docker.operators.docker import DockerOperator
 from airflow.utils.dates import days_ago
 from airflow.sensors.python import PythonSensor
-from docker.types import Mount
 
-from utilities import VAL_SIZE, METRICS_DIR_NAME, GENERATE_DIR_NAME, PROCESSED_DIR_NAME, TRANSFORMER_DIR_NAME, MODEL_DIR_NAME, MOUNT_OBJ, default_args, wait_file
+from utilities import (
+    VAL_SIZE, METRICS_DIR_NAME, GENERATE_DIR_NAME,
+    PROCESSED_DIR_NAME, TRANSFORMER_DIR_NAME,
+    MODEL_DIR_NAME, MOUNT_OBJ, default_args, wait_file
+)
 
 
 with DAG(
@@ -46,7 +47,7 @@ with DAG(
 
     val_model = DockerOperator(
         image="airflow-validation",
-        command=f"--model_source_path {MODEL_DIR_NAME} --data_source_path " \
+        command=f"--model_source_path {MODEL_DIR_NAME} --data_source_path "
                 f"{PROCESSED_DIR_NAME} --metric_path {METRICS_DIR_NAME}",
         task_id="docker-airflow-valid",
         do_xcom_push=False,
@@ -74,4 +75,4 @@ with DAG(
         mode="poke",
     )
 
-    [ wait_data, wait_target ] >> preprocess_data >> split_data >> train_model >> val_model
+    [wait_data, wait_target] >> preprocess_data >> split_data >> train_model >> val_model

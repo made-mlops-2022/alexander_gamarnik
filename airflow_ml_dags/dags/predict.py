@@ -4,7 +4,11 @@ from airflow.utils.dates import days_ago
 from airflow.sensors.python import PythonSensor
 
 
-from utilities import MOUNT_OBJ, TRANSFORMER_DIR_NAME, MODEL_DIR_NAME, GENERATE_DIR_NAME, PREDICTIONS_DIR_NAME, default_args, wait_file
+from utilities import (
+        MOUNT_OBJ, TRANSFORMER_DIR_NAME, MODEL_DIR_NAME,
+        GENERATE_DIR_NAME, PREDICTIONS_DIR_NAME,
+        default_args, wait_file
+)
 
 
 with DAG(

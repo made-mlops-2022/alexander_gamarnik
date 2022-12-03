@@ -8,6 +8,7 @@ PREDICT_FILENAME = "predict.csv"
 TRANSFORMER_FILENAME = "transform.pkl"
 MODEL_FILENAME = "model.pkl"
 
+
 @click.command("predict")
 @click.option("--source_path", default="../data/raw")
 @click.option("--out_path", default="../data/predictions")
