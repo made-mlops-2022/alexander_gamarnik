@@ -81,29 +81,29 @@ services:
      image: airflow-generate-data
      restart: "no"
 
-  # preprocess:
-  #  build:
-  #    context: images/airflow-preprocess
-  #  image: airflow-preprocess
-  #  restart: "no"
+  preprocess:
+   build:
+     context: images/airflow-preprocess
+   image: airflow-preprocess
+   restart: "no"
 
-  # split_data:
-  #  build:
-  #    context: images/airflow-split
-  #  image: airflow-split
-  #  restart: "no"
+  split_data:
+   build:
+     context: images/airflow-split
+   image: airflow-split
+   restart: "no"
 
-  # train_model:
-  #  build:
-  #    context: images/airflow-train
-  #  image: airflow-train
-  #  restart: "no"
+  train_model:
+   build:
+     context: images/airflow-train
+   image: airflow-train
+   restart: "no"
 
-  # val_model:
-  #  build:
-  #    context: images/airflow-validation
-  #  image: airflow-validation
-  #  restart: "no"
+  val_model:
+   build:
+     context: images/airflow-validation
+   image: airflow-validation
+   restart: "no"
 
   # predict:
   #  build:
