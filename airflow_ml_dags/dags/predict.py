@@ -14,7 +14,7 @@ from utilities import (
 with DAG(
         "predict",
         default_args=default_args,
-        schedule_interval="@daily",
+        schedule_interval="@weekly",
         start_date=days_ago(0),
 ) as dag:
 
