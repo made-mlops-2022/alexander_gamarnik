@@ -1,3 +1,4 @@
+import os
 from datetime import timedelta
 
 from airflow.models import Variable
@@ -24,3 +25,6 @@ default_args = {
     "retries": 1,
     "retry_delay": timedelta(minutes=1),
 }
+
+def wait_file(file_name: str) -> bool:
+    return os.path.exists(file_name)
