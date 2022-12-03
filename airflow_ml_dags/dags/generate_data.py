@@ -5,24 +5,14 @@ from airflow.providers.docker.operators.docker import DockerOperator
 from airflow.utils.dates import days_ago
 from docker.types import Mount
 
+from utilities import MOUNT_OBJ, default_args
+
 
 OUTPUT_DIR_NAME = "data/raw/{{ ds }}"
 
-default_args = {
-    "owner": "alexander gamarnik",
-    "email": ["crystall.werben@gmail.com"],
-    "retries": 1,
-    "retry_delay": timedelta(minutes=5),
-}
-
-MOUNT_OBJ = [Mount(
-    source="/Users/admin/Documents/TechPark/2_sem/mlops/airflow_ml_dags/data",
-    target="/data",
-    type='bind'
-    )]
 
 with DAG(
-        "data_generator",
+        "generator",
         default_args=default_args,
         schedule_interval="@daily",
         start_date=days_ago(0),
