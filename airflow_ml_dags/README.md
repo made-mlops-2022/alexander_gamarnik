@@ -3,3 +3,9 @@
 # Технопарк, МГТУ, ML-21, Гамарник Александр
 
 MLOps Homework 3
+
+To start:
+~~~
+export FERNET_KEY=$(python3 -c "from cryptography.fernet import Fernet; FERNET_KEY = Fernet.generate_key().decode(); print(FERNET_KEY)")
+docker compose up --build
+~~~
