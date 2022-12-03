@@ -105,11 +105,11 @@ services:
    image: airflow-validation
    restart: "no"
 
-  # predict:
-  #  build:
-  #    context: images/airflow-predict
-  #  image: airflow-predict
-  #  restart: "no"
+  predict:
+   build:
+     context: images/airflow-predict
+   image: airflow-predict
+   restart: "no"
 
 volumes:
   logs:

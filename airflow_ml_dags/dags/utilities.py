@@ -1,5 +1,6 @@
 from datetime import timedelta
 
+from airflow.models import Variable
 from docker.types import Mount
 from airflow.utils.dates import days_ago
 
@@ -9,6 +10,8 @@ GENERATE_DIR_NAME = "/data/raw/{{ ds }}"
 PROCESSED_DIR_NAME = "/data/processed/{{ ds }}"
 TRANSFORMER_DIR_NAME = "/data/transformer_model/{{ ds }}"
 MODEL_DIR_NAME = "/data/models/{{ ds }}"
+PREDICTIONS_DIR_NAME = "/data/predictions/{{ ds }}"
+
 MOUNT_OBJ = [Mount(
     source="/Users/admin/Documents/TechPark/2_sem/mlops/airflow_ml_dags/data",
     target="/data",
