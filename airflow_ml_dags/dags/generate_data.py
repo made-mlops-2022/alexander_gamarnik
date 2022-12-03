@@ -21,6 +21,7 @@ with DAG(
         task_id="docker-airflow-generate-data",
         do_xcom_push=False,
         network_mode="bridge",
+        auto_remove=True,
         mounts=MOUNT_OBJ
     )
 
