@@ -28,14 +28,4 @@ with DAG(
         mounts=MOUNT_OBJ
     )
 
-    wait_data = PythonSensor(
-        task_id='wait-for-predict-data',
-        python_callable=wait_file,
-        op_args=['/opt/airflow/data/raw/{{ ds }}/data.csv'],
-        timeout=6000,
-        poke_interval=10,
-        retries=100,
-        mode="poke"
-    )
-
-    wait_data >> predict
+    predict

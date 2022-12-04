@@ -55,24 +55,4 @@ with DAG(
         mounts=MOUNT_OBJ
     )
 
-    wait_data = PythonSensor(
-        task_id="wait-for-data",
-        python_callable=wait_file,
-        op_args=["/opt/airflow/data/raw/{{ ds }}/data.csv"],
-        timeout=6000,
-        poke_interval=10,
-        retries=100,
-        mode="poke",
-    )
-
-    wait_target = PythonSensor(
-        task_id="wait-for-target",
-        python_callable=wait_file,
-        op_args=["/opt/airflow/data/raw/{{ ds }}/target.csv"],
-        timeout=6000,
-        poke_interval=10,
-        retries=100,
-        mode="poke",
-    )
-
-    [wait_data, wait_target] >> preprocess_data >> split_data >> train_model >> val_model
+    preprocess_data >> split_data >> train_model >> val_model
