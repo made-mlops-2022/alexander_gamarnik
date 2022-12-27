@@ -10,3 +10,5 @@ HW1: [ml_project](https://github.com/made-mlops-2022/alexander_gamarnik/tree/hom
 HW2: [online_inference](https://github.com/made-mlops-2022/alexander_gamarnik/tree/homework2/online_inference)
 
 HW3: [airflow_ml_dags](https://github.com/made-mlops-2022/alexander_gamarnik/tree/homework3/airflow_ml_dags)
+
+HW4: [kubernetes](https://github.com/made-mlops-2022/alexander_gamarnik/tree/homework4/kubernetes)
